@@ -1,0 +1,26 @@
+{
+  "name": "jka-core",
+  "version": "0.1.1",
+  "description": "Library for working with Jedi Academy servers",
+  "main": "index.js",
+  "author": "TrayHard",
+  "license": "MIT",
+  "scripts": {
+    "start": "node dist/index.js",
+    "start:local": "yarn build && node dist/index.js",
+    "start:watch": "nodemon",
+    "dev": "yarn && ts-node-dev --watch --respawn --transpile-only ./src/index.ts",
+    "build": "tsc --project ./"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^17.0.15",
+    "nodemon": "^2.0.15",
+    "ts-node-dev": "^1.1.8"
+  }
+}
