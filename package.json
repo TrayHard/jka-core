@@ -2,7 +2,8 @@
   "name": "jka-core",
   "version": "0.1.2",
   "description": "Library for working with Jedi Academy servers",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "author": "TrayHard <wwwtrayfrost@gmail.com> (https://github.com/TrayHard)",
   "license": "MIT",
   "keywords": [
@@ -20,8 +21,8 @@
     "email": "wwwtrayfrost@gmail.com"
   },
   "scripts": {
-    "start": "node dist/index.js",
-    "start:local": "yarn build && node dist/index.js",
+    "start": "node lib/index.js",
+    "start:local": "yarn build && node lib/index.js",
     "start:watch": "nodemon",
     "dev": "yarn && ts-node-dev --watch --respawn --transpile-only ./src/index.ts",
     "build": "tsc --project ./"
