@@ -41,7 +41,7 @@ export class Bitfield {
    * @param value The value which should be used for setting up
    * @returns True if succeed, false if there is no such key
    */
-  public set(key: string, value: boolean) {
+  public set(key: string, value: boolean): boolean {
     const index = this._keys.findIndex((el) => el === key);
     if (index === -1) {
       return false;
@@ -56,7 +56,7 @@ export class Bitfield {
    * @param key The key which should be taken
    * @returns The value of the key or null, if there is no such key
    */
-  public get(key: string) {
+  public get(key: string): boolean | null {
     const index = this._keys.findIndex((el) => el === key);
     return index === -1
       ? null
