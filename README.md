@@ -7,7 +7,12 @@ Library for working with Jedi Academy servers
 npm i jka-core
 ```
 
-## Features
+## To do:
+- [ ] `rcon` request
+- [ ] `getInfo` request
+- [ ] ... any ideas? Write me in Discord: `Tray#0219`
+
+## Current features
 What you can do right now:
 
 1. You can make UDP requests and get the JSON formatted raw response with `getStatusRaw`
