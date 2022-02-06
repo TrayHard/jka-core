@@ -22,6 +22,12 @@ export class Bitfield {
     )
   }
 
+  public get binary(): string {
+    return this._bits
+      .map(x => x ? '1' : '0')
+      .join('')
+  }
+
   public get list() {
     return this._bits.reduce((acc, el, i) => ({
       ...acc,
