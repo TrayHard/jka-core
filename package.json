@@ -2,15 +2,25 @@
   "name": "jka-core",
   "version": "0.1.1",
   "description": "Library for working with Jedi Academy servers",
-  "main": "index.js",
-  "author": "TrayHard",
+  "main": "dist/index.js",
+  "author": "TrayHard <wwwtrayfrost@gmail.com> (https://github.com/TrayHard)",
   "license": "MIT",
+  "keywords": ["jka", "rujka", "jedi academy", "videogames", "star wars", "jedi knight", "jedi knight academy"],
+  "homepage": "https://github.com/TrayHard/jka-core#readme",
+  "bugs": {
+    "url": "https://github.com/TrayHard/jka-core/issues",
+    "email": "wwwtrayfrost@gmail.com"
+  },
   "scripts": {
     "start": "node dist/index.js",
     "start:local": "yarn build && node dist/index.js",
     "start:watch": "nodemon",
     "dev": "yarn && ts-node-dev --watch --respawn --transpile-only ./src/index.ts",
     "build": "tsc --project ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TrayHard/jka-core"
   },
   "dependencies": {
     "dotenv": "^16.0.0",
