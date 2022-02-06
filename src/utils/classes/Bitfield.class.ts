@@ -28,7 +28,7 @@ export class Bitfield {
       .join('')
   }
 
-  public get list() {
+  public get list(): object {
     return this._bits.reduce((acc, el, i) => ({
       ...acc,
       [this._keys[i]]: el,
