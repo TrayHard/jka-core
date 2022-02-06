@@ -14,14 +14,14 @@ type TCvarsObject = {
 }
 
 export async function getStatusRaw(server: string, timeout?: number): Promise<TGetStatusRawResponse> {
-  let response: unknown;
+  let strToParse = '';
   try {
-    response = await baseRequest({ request: 'getstatus', server, timeout })
+    strToParse = await baseRequest({ request: 'getstatus', server, timeout })
   } catch (error) {
     console.error('GetStatus Request failed:');
     throw error;
   }
-  const strToParse = (response as string).replace(/����statusResponse\n/, '');
+  strToParse = strToParse.replace(/����statusResponse\n/, '');
 
   console.log(strToParse);
 
