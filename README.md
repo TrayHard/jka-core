@@ -3,7 +3,7 @@ Library for working with Jedi Academy servers
 
 What you can do right now:
 
-1. Make UDP requests and get the JSON formatted raw response
+1. You can make UDP requests and get the JSON formatted raw response with `getStatusRaw`
 ```js
 const response = await getStatusRaw('rujka.ru:29070') // or '37.230.210.176:29070'
 
