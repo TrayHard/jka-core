@@ -1,6 +1,13 @@
 # JKA Core
 Library for working with Jedi Academy servers
 
+## Install
+
+```
+npm i jka-core
+```
+
+## Features
 What you can do right now:
 
 1. You can make UDP requests and get the JSON formatted raw response with `getStatusRaw`
