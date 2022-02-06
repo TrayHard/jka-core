@@ -34,4 +34,32 @@ export class Bitfield {
       [this._keys[i]]: el,
     }), {})
   }
+
+  /**
+   * Sets key of bitfield to specific parameter
+   * @param key The key which should be set
+   * @param value The value which should be used for setting up
+   * @returns True if succeed, false if there is no such key
+   */
+  public set(key: string, value: boolean) {
+    const index = this._keys.findIndex((el) => el === key);
+    if (index === -1) {
+      return false;
+    } else {
+      this._bits[index] = value;
+      return true;
+    }
+  }
+
+  /**
+   * Gets the current value of the key of the bitfield
+   * @param key The key which should be taken
+   * @returns The value of the key or null, if there is no such key
+   */
+  public get(key: string) {
+    const index = this._keys.findIndex((el) => el === key);
+    return index === -1
+      ? null
+      : this._bits[index]
+  }
 }
