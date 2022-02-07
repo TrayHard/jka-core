@@ -1,7 +1,7 @@
 import { EGetStatusFields } from "../constants";
 import { IGetStatusClientUser, parseClientUsersFromStatus } from "../utils/parsers/clientUsersFromStatus.parser";
 import { EGetStatusParseValueType, parseCvarValueFromStatus } from "../utils/parsers/cvarValueFromStatus.parser";
-import { baseRequest } from "./base.request";
+import { basicRequest } from "./basic.request";
 
 export type TGetStatusRawResponse = {
   cvars: Record<EGetStatusFields, string>,
@@ -16,7 +16,7 @@ type TCvarsObject = {
 export async function getStatusRaw(server: string, timeout?: number): Promise<TGetStatusRawResponse> {
   let response: unknown;
   try {
-    response = await baseRequest({ request: 'getstatus', server, timeout })
+    response = await basicRequest({ request: 'getstatus', server, timeout })
   } catch (error) {
     console.error('GetStatus Request failed:');
     throw error;
