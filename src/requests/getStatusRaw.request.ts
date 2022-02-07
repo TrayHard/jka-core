@@ -23,8 +23,6 @@ export async function getStatusRaw(server: string, timeout?: number): Promise<TG
   }
   const strToParse = (response as string).replace(/����statusResponse\n/, '');
 
-  console.log(strToParse);
-
   const cvars: TCvarsObject[] = Object.values(EGetStatusFields).map((field) => ({
     cvarName: field as EGetStatusFields,
     returnType: field === EGetStatusFields.G_GAMETYPE
