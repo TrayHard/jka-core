@@ -1,9 +1,9 @@
 import { EGametypes, EServerTypes } from "../..";
 import { gametypeNumToNamesMapper } from "../mappers/gametype.mapper";
-import { clientUsersFromRconStatusYbeproxy, IRconStatusYbeproxyClientUser } from "./clientUsersFromRconStatusYbeproxy.parser";
+import { clientUsersFromRconStatusJapro, IRconStatusJaproClientUser } from "./clientUsersFromRconStatusJapro.parser";
 
-export interface IRconStatusYbeproxyResponse {
-  type: EServerTypes.YBEPROXY
+export interface IRconStatusJaproResponse {
+  type: EServerTypes.JAPRO
   hostname: string,
   ip: string,
   port: string,
@@ -13,10 +13,11 @@ export interface IRconStatusYbeproxyResponse {
   gamename: string,
   map: string,
   gametype: EGametypes,
-  players: IRconStatusYbeproxyClientUser[],
+  uptime: string,
+  players: IRconStatusJaproClientUser[],
 }
 
-export function rconStatusYbeproxyParser(strToParse: string): IRconStatusYbeproxyResponse {
+export function rconStatusJaproParser(strToParse: string): IRconStatusJaproResponse {
   let lines = strToParse.split('\n');
   if (lines.length < 7) throw new Error('No information provided!');
 
@@ -30,13 +31,14 @@ export function rconStatusYbeproxyParser(strToParse: string): IRconStatusYbeprox
   let gamename = '';
   let map = '';
   let gametype = EGametypes.DUEL;
+  let uptime = '';
 
   lines.map(line => {
     // Skip rubbish lines
     if (
       !line ||
       line.startsWith('-') ||
-      line.startsWith('score') ||
+      line.startsWith('cl') ||
       line.startsWith('players')
     ) return;
 
@@ -69,13 +71,19 @@ export function rconStatusYbeproxyParser(strToParse: string): IRconStatusYbeprox
         gametype = gametypeNumToNamesMapper(match[2]);
       }
 
+    } else if (line.startsWith('uptime')) {
+      const match = line.match(/^uptime\s{2}:\s(\S+)/)
+      if (match) {
+        uptime = match[1];
+      }
+
     } else {
       clientsInfo.push(line)
     }
   })
 
   return {
-    type: EServerTypes.YBEPROXY,
+    type: EServerTypes.JAPRO,
     hostname,
     ip,
     port,
@@ -85,6 +93,7 @@ export function rconStatusYbeproxyParser(strToParse: string): IRconStatusYbeprox
     gamename,
     map,
     gametype,
-    players: clientUsersFromRconStatusYbeproxy(clientsInfo),
+    uptime,
+    players: clientUsersFromRconStatusJapro(clientsInfo),
   }
 }

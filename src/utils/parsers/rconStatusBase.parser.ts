@@ -1,8 +1,13 @@
 import { EServerTypes } from "../..";
-import { TRconStatusResponse } from "../../requests/rcon/rconStatus.request";
-import { clientUsersFromRconStatusBase } from "./clientUsersFromRconStatusBase.parser";
+import { clientUsersFromRconStatusBase, IRconStatusBaseClientUser } from "./clientUsersFromRconStatusBase.parser";
 
-export function rconStatusBaseParser(strToParse: string): TRconStatusResponse {
+export interface IRconStatusBaseResponse {
+  type: EServerTypes.BASE
+  map: string,
+  players: IRconStatusBaseClientUser[],
+}
+
+export function rconStatusBaseParser(strToParse: string): IRconStatusBaseResponse {
   let lines = strToParse.split('\n');
   if (lines.length < 2) throw new Error('No information provided!');
   const clientsInfo: string[] = [];

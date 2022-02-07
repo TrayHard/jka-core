@@ -1,42 +1,13 @@
-import { EGametypes, EServerTypes } from "../..";
-import { IRconStatusBaseClientUser } from "../../utils/parsers/clientUsersFromRconStatusBase.parser";
-import { IRconStatusYbeproxyClientUser } from "../../utils/parsers/clientUsersFromRconStatusYbeproxy.parser";
-import { rconStatusBaseParser } from "../../utils/parsers/rconStatusBase.parser";
-import { rconStatusYbeproxyParser } from "../../utils/parsers/rconStatusYbeproxy.parser";
+import { EServerTypes } from "../..";
+import { IRconStatusBaseResponse, rconStatusBaseParser } from "../../utils/parsers/rconStatusBase.parser";
+import { IRconStatusJaproResponse, rconStatusJaproParser } from "../../utils/parsers/rconStatusJapro.parser";
+import { IRconStatusYbeproxyResponse, rconStatusYbeproxyParser } from "../../utils/parsers/rconStatusYbeproxy.parser";
 import { rconBasicRequest } from "../rconBasic.request";
 
-export type TRconStatusResponse = {
-  type: EServerTypes.BASE
-  map: string,
-  players: IRconStatusBaseClientUser[],
-} | {
-  type: EServerTypes.YBEPROXY
-  hostname: string,
-  ip: string,
-  port: string,
-  os: string,
-  version: string,
-  protocol: number,
-  gamename: string,
-  map: string,
-  gametype: EGametypes,
-  players: IRconStatusYbeproxyClientUser[],
-} | {
-  type: EServerTypes.JAPRO
-  hostname: string,
-  ip: string,
-  port: string,
-  version: string,
-  protocol: number,
-  gamename: string,
-  map: string,
-  gametype: EGametypes,
-  uptime: string,
-  players: IRconStatusJaproClientUser[],
-}
-
-
-export interface IRconStatusJaproClientUser extends IRconStatusYbeproxyClientUser {}
+export type TRconStatusResponse =
+  IRconStatusBaseResponse |
+  IRconStatusYbeproxyResponse |
+  IRconStatusJaproResponse
 
 export async function rconStatus(server: string, rconpassword: string, timeout?: number): Promise<TRconStatusResponse> {
   let strToParse = '';
@@ -51,7 +22,7 @@ export async function rconStatus(server: string, rconpassword: string, timeout?:
     case EServerTypes.BASE:
       return rconStatusBaseParser(strToParse);
     case EServerTypes.JAPRO:
-      return rconStatusBaseParser(strToParse);
+      return rconStatusJaproParser(strToParse);
     case EServerTypes.YBEPROXY:
       return rconStatusYbeproxyParser(strToParse);
     default:
