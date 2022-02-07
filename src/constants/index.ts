@@ -7,6 +7,12 @@ export enum EGametypes {
   SIEGE = 'SIEGE',
 }
 
+export enum EServerTypes {
+  JAPRO = 'JAPRO',
+  YBEPROXY = 'YBEPROXY',
+  BASE = 'BASE',
+}
+
 export enum EGetStatusFields {
   SV_HOSTNAME = 'sv_hostname',
   SV_MAXCLIENTS = 'sv_maxclients',

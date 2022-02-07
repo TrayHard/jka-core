@@ -1,7 +1,7 @@
 import { EGetStatusFields } from "../constants";
 import { IGetStatusClientUser, parseClientUsersFromStatus } from "../utils/parsers/clientUsersFromStatus.parser";
 import { EGetStatusParseValueType, parseCvarValueFromStatus } from "../utils/parsers/cvarValueFromStatus.parser";
-import { baseRequest } from "./base.request";
+import { basicRequest } from "./basic.request";
 
 export type TGetStatusRawResponse = {
   cvars: Record<EGetStatusFields, string>,
@@ -22,8 +22,6 @@ export async function getStatusRaw(server: string, timeout?: number): Promise<TG
     throw error;
   }
   strToParse = strToParse.replace(/����statusResponse\n/, '');
-
-  console.log(strToParse);
 
   const cvars: TCvarsObject[] = Object.values(EGetStatusFields).map((field) => ({
     cvarName: field as EGetStatusFields,
