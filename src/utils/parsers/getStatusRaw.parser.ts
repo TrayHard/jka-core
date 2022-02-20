@@ -12,7 +12,7 @@ type TCvarsObject = {
   returnType: EGetStatusParseValueType,
 }
 
-export function getStatusRawParser(strToParse: string) {
+export function getStatusRawParser(strToParse: string): TGetStatusRawResponse {
   const str = strToParse.replace(/����statusResponse\n/, '');
 
   const cvars: TCvarsObject[] = Object.values(EGetStatusFields).map((field) => ({

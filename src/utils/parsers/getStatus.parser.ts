@@ -122,7 +122,7 @@ const cvarsTypeHashMap: {
   ],
 }
 
-export function getStatusParser(strToParse: string): Promise<TGetStatusSmartResponse>  {
+export function getStatusParser(strToParse: string): TGetStatusSmartResponse  {
   const getStatusRawParsed = getStatusRawParser(strToParse)
 
   let result: any = {
