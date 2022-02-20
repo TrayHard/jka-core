@@ -69,7 +69,6 @@ type TGetStatusSmartResponse = {
   clients: TGetStatusClientUser[],
 }
 
-
 export async function getStatusSmart(server: string, timeout?: number): Promise<TGetStatusSmartResponse> {
   let response: TGetStatusRawResponse;
   try {
@@ -79,7 +78,7 @@ export async function getStatusSmart(server: string, timeout?: number): Promise<
     throw error;
   }
 
-  const cvarHashMap: {
+  const cvarsTypeHashMap: {
     [key: string]: Array<keyof TCvarsSmart>
   } = {
     str: [
@@ -137,16 +136,16 @@ export async function getStatusSmart(server: string, timeout?: number): Promise<
     cvars: {},
     clients: [],
   };
-  cvarHashMap.str.forEach((field) => {
+  cvarsTypeHashMap.str.forEach((field) => {
     result.cvars[field] = response.cvars[field];
   })
-  cvarHashMap.strToInt.forEach((field) => {
+  cvarsTypeHashMap.strToInt.forEach((field) => {
     result.cvars[field] = parseIntOtherwiseNull(response.cvars[field]);
   })
-  cvarHashMap.strToFloat.forEach((field) => {
+  cvarsTypeHashMap.strToFloat.forEach((field) => {
     result.cvars[field] = parseFloatOtherwiseNull(response.cvars[field]);
   })
-  cvarHashMap.booleans.forEach((field) => {
+  cvarsTypeHashMap.booleans.forEach((field) => {
     result.cvars[field] = parseBooleanOtherwiseNull(response.cvars[field]);
   })
 
@@ -169,14 +168,12 @@ export async function getStatusSmart(server: string, timeout?: number): Promise<
       WEAPON_DISABLE_VALUES
     )
 
-  result.clients = response.clients.map((el) => {
-    return {
-      name: el.name,
-      ping: parseIntOtherwiseNull(el.ping),
-      score: parseIntOtherwiseNull(el.score),
-      isBot: parseIntOtherwiseNull(el.ping) === 0,
-    }
-  })
+  result.clients = response.clients.map((el) => ({
+    name: el.name,
+    ping: parseIntOtherwiseNull(el.ping),
+    score: parseIntOtherwiseNull(el.score),
+    isBot: parseIntOtherwiseNull(el.ping) === 0,
+  }))
 
   return result;
 }
