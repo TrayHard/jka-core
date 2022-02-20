@@ -1,8 +1,8 @@
 import { EGametypes, EServerTypes } from "../..";
 import { gametypeNumToNamesMapper } from "../mappers/gametype.mapper";
-import { clientUsersFromRconStatusJapro, IRconStatusJaproClientUser } from "./clientUsersFromRconStatusJapro.parser";
+import { clientUsersFromRconStatusJapro, TRconStatusJaproClientUser } from "./clientUsersFromRconStatusJapro.parser";
 
-export interface IRconStatusJaproResponse {
+export type TRconStatusJaproResponse = {
   type: EServerTypes.JAPRO
   hostname: string,
   ip: string,
@@ -14,10 +14,10 @@ export interface IRconStatusJaproResponse {
   map: string,
   gametype: EGametypes,
   uptime: string,
-  players: IRconStatusJaproClientUser[],
+  players: TRconStatusJaproClientUser[],
 }
 
-export function rconStatusJaproParser(strToParse: string): IRconStatusJaproResponse {
+export function rconStatusJaproParser(strToParse: string): TRconStatusJaproResponse {
   let lines = strToParse.split('\n');
   if (lines.length < 7) throw new Error('No information provided!');
 

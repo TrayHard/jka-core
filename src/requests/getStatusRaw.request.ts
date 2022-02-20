@@ -1,11 +1,11 @@
 import { EGetStatusFields } from "../constants";
-import { IGetStatusClientUser, parseClientUsersFromStatus } from "../utils/parsers/clientUsersFromStatus.parser";
+import { TGetStatusClientUser, parseClientUsersFromStatus } from "../utils/parsers/clientUsersFromStatus.parser";
 import { EGetStatusParseValueType, parseCvarValueFromStatus } from "../utils/parsers/cvarValueFromStatus.parser";
 import { basicRequest } from "./basic.request";
 
 export type TGetStatusRawResponse = {
   cvars: Record<EGetStatusFields, string>,
-  clients: IGetStatusClientUser[],
+  clients: TGetStatusClientUser[],
 }
 
 type TCvarsObject = {

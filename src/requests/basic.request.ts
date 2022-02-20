@@ -2,7 +2,7 @@ import { createSocket } from 'dgram';
 import { getIpAndPort } from '../validation/getIpAndPort.validator';
 import { DEFAULT_REQUEST_TIMEOUT, MIN_REQUEST_TIMEOUT } from '../constants';
 
-export interface IBaseRequestParams {
+export type TBaseRequestParams = {
   server: string,
   request: string,
   timeout?: number,
@@ -17,7 +17,7 @@ export interface IBaseRequestParams {
  * timeout - timer in secs after which request would be interrupted (min: 2, default: 10)
  * @returns string with server response or throws an error
  */
-export const basicRequest = (params: IBaseRequestParams): Promise<string> => {
+export const basicRequest = (params: TBaseRequestParams): Promise<string> => {
   const { ip, port, timeout, request } = validateAndParseInput(params);
 
   return new Promise<string>((resolve, reject) => {
@@ -43,7 +43,7 @@ export const basicRequest = (params: IBaseRequestParams): Promise<string> => {
   })
 }
 
-function validateAndParseInput (params: IBaseRequestParams): {
+function validateAndParseInput (params: TBaseRequestParams): {
   ip: string, port: number, timeout: number, request: string,
 } {
   const noParams = [];

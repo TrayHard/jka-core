@@ -1,4 +1,4 @@
-export interface IRconStatusYbeproxyClientUser {
+export type TRconStatusYbeproxyClientUser = {
   id: number,
   name: string,
   address: string | null,
@@ -8,7 +8,7 @@ export interface IRconStatusYbeproxyClientUser {
   rate: number,
 }
 
-export function clientUsersFromRconStatusYbeproxy(clientsInfoStrArray: string[]): IRconStatusYbeproxyClientUser[] {
+export function clientUsersFromRconStatusYbeproxy(clientsInfoStrArray: string[]): TRconStatusYbeproxyClientUser[] {
   return clientsInfoStrArray.map(line => {
     const score = parseInt(line.slice(0, 5).trim());
     const isBot = line.slice(18, 40).trim() === 'bot';

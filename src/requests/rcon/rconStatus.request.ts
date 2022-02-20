@@ -1,13 +1,13 @@
 import { EServerTypes } from "../..";
-import { IRconStatusBaseResponse, rconStatusBaseParser } from "../../utils/parsers/rconStatusBase.parser";
-import { IRconStatusJaproResponse, rconStatusJaproParser } from "../../utils/parsers/rconStatusJapro.parser";
-import { IRconStatusYbeproxyResponse, rconStatusYbeproxyParser } from "../../utils/parsers/rconStatusYbeproxy.parser";
+import { TRconStatusBaseResponse, rconStatusBaseParser } from "../../utils/parsers/rconStatusBase.parser";
+import { TRconStatusJaproResponse, rconStatusJaproParser } from "../../utils/parsers/rconStatusJapro.parser";
+import { TRconStatusYbeproxyResponse, rconStatusYbeproxyParser } from "../../utils/parsers/rconStatusYbeproxy.parser";
 import { rconBasicRequest } from "../rconBasic.request";
 
 export type TRconStatusResponse =
-  IRconStatusBaseResponse |
-  IRconStatusYbeproxyResponse |
-  IRconStatusJaproResponse
+  TRconStatusBaseResponse |
+  TRconStatusYbeproxyResponse |
+  TRconStatusJaproResponse
 
 export async function rconStatus(server: string, rconpassword: string, timeout?: number): Promise<TRconStatusResponse> {
   let strToParse = '';

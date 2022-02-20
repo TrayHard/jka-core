@@ -1,4 +1,4 @@
-export interface IRconStatusBaseClientUser {
+export type TRconStatusBaseClientUser = {
   id: number,
   score: number | null,
   ping: number | null,
@@ -10,7 +10,7 @@ export interface IRconStatusBaseClientUser {
   rate: number | null,
 }
 
-export function clientUsersFromRconStatusBase(clientsInfoStrArray: string[]): IRconStatusBaseClientUser[] {
+export function clientUsersFromRconStatusBase(clientsInfoStrArray: string[]): TRconStatusBaseClientUser[] {
 
   return clientsInfoStrArray.map(line => {
     const id = parseInt(line.slice(0, 3).trim());

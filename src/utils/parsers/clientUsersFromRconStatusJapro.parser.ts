@@ -1,8 +1,8 @@
-import { IRconStatusYbeproxyClientUser } from "./clientUsersFromRconStatusYbeproxy.parser";
+import { TRconStatusYbeproxyClientUser } from "./clientUsersFromRconStatusYbeproxy.parser";
 
-export interface IRconStatusJaproClientUser extends IRconStatusYbeproxyClientUser {}
+export type TRconStatusJaproClientUser = TRconStatusYbeproxyClientUser;
 
-export function clientUsersFromRconStatusJapro(clientsInfoStrArray: string[]): IRconStatusJaproClientUser[] {
+export function clientUsersFromRconStatusJapro(clientsInfoStrArray: string[]): TRconStatusJaproClientUser[] {
   return clientsInfoStrArray.map(line => {
     const id = parseInt(line.slice(0, 2).trim());
     const score = parseInt(line.slice(3, 8).trim());

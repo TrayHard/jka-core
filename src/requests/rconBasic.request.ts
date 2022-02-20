@@ -1,6 +1,6 @@
 import { basicRequest } from "./basic.request";
 
-export interface IRconBaseRequestParams {
+export type TRconBaseRequestParams = {
   server: string,
   rconpassword: string,
   cmd: string,
@@ -13,7 +13,7 @@ const ERRORS = {
   INVALID_CMD_FORMAT: 'Invalid rcon command format! It must be a string!',
 }
 
-export async function rconBasicRequest(params: IRconBaseRequestParams): Promise<string> {
+export async function rconBasicRequest(params: TRconBaseRequestParams): Promise<string> {
   // TODO: Add input validation
   const { server, rconpassword, cmd, timeout } = parseAndValidate(params);
   let response = '';
@@ -30,7 +30,7 @@ export async function rconBasicRequest(params: IRconBaseRequestParams): Promise<
   return response;
 }
 
-function parseAndValidate(params: IRconBaseRequestParams) {
+function parseAndValidate(params: TRconBaseRequestParams) {
   let { cmd, rconpassword, server, timeout } = params;
   if (typeof rconpassword === 'string') {
     rconpassword = rconpassword.trim();

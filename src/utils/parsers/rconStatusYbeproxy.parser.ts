@@ -1,8 +1,8 @@
 import { EGametypes, EServerTypes } from "../..";
 import { gametypeNumToNamesMapper } from "../mappers/gametype.mapper";
-import { clientUsersFromRconStatusYbeproxy, IRconStatusYbeproxyClientUser } from "./clientUsersFromRconStatusYbeproxy.parser";
+import { clientUsersFromRconStatusYbeproxy, TRconStatusYbeproxyClientUser } from "./clientUsersFromRconStatusYbeproxy.parser";
 
-export interface IRconStatusYbeproxyResponse {
+export type TRconStatusYbeproxyResponse = {
   type: EServerTypes.YBEPROXY
   hostname: string,
   ip: string,
@@ -13,10 +13,10 @@ export interface IRconStatusYbeproxyResponse {
   gamename: string,
   map: string,
   gametype: EGametypes,
-  players: IRconStatusYbeproxyClientUser[],
+  players: TRconStatusYbeproxyClientUser[],
 }
 
-export function rconStatusYbeproxyParser(strToParse: string): IRconStatusYbeproxyResponse {
+export function rconStatusYbeproxyParser(strToParse: string): TRconStatusYbeproxyResponse {
   let lines = strToParse.split('\n');
   if (lines.length < 7) throw new Error('No information provided!');
 

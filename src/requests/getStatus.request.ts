@@ -1,7 +1,7 @@
 import { EGetStatusFields, FORCEPOWER_DISABLE_VALUES, WEAPON_DISABLE_VALUES } from "../constants";
-import { parseBooleanOtherwiseNull, parseFloatOtherwiseNull, parseIntOtherwiseNull, snakeToCamel } from "../utils";
+import { parseBooleanOtherwiseNull, parseFloatOtherwiseNull, parseIntOtherwiseNull } from "../utils";
 import { Bitfield } from "../utils/classes/Bitfield.class";
-import { IGetStatusClientUser } from "../utils/parsers/clientUsersFromStatus.parser";
+import { TGetStatusClientUser } from "../utils/parsers/clientUsersFromStatus.parser";
 import { getStatusRaw, TGetStatusRawResponse } from "./getStatusRaw.request";
 
 type TCvarsSmart = {
@@ -66,7 +66,7 @@ type TCvarsSmart = {
 
 type TGetStatusSmartResponse = {
   cvars: TCvarsSmart,
-  clients: IGetStatusClientUser[],
+  clients: TGetStatusClientUser[],
 }
 
 
