@@ -1,44 +1,12 @@
-import { EGetStatusFields } from "../constants";
-import { TGetStatusClientUser, parseClientUsersFromStatus } from "../utils/parsers/clientUsersFromStatus.parser";
-import { EGetStatusParseValueType, parseCvarValueFromStatus } from "../utils/parsers/cvarValueFromStatus.parser";
+import { getStatusRawParser, TGetStatusRawResponse } from "../utils/parsers/getStatusRaw.parser";
 import { basicRequest } from "./basic.request";
 
-export type TGetStatusRawResponse = {
-  cvars: Record<EGetStatusFields, string>,
-  clients: TGetStatusClientUser[],
-}
-
-type TCvarsObject = {
-  cvarName: EGetStatusFields,
-  returnType: EGetStatusParseValueType,
-}
-
 export async function getStatusRaw(server: string, timeout?: number): Promise<TGetStatusRawResponse> {
-  let strToParse = '';
+  let strToParse: string;
   try {
     strToParse = await basicRequest({ request: 'getstatus', server, timeout })
+    return getStatusRawParser(strToParse);
   } catch (error) {
-    console.error('GetStatus Request failed:');
-    throw error;
+    throw new Error(`GetStatus Request failed:\n"${(error as Error).message}"`)
   }
-  strToParse = strToParse.replace(/����statusResponse\n/, '');
-
-  const cvars: TCvarsObject[] = Object.values(EGetStatusFields).map((field) => ({
-    cvarName: field as EGetStatusFields,
-    returnType: field === EGetStatusFields.G_GAMETYPE
-      ? EGetStatusParseValueType.GAMETYPE
-      : EGetStatusParseValueType.STRING,
-  }));
-
-  return {
-    cvars: processCvars(strToParse, cvars),
-    clients: parseClientUsersFromStatus(strToParse),
-  };
-}
-
-function processCvars(strToParse: string, cvars: TCvarsObject[]): Record<EGetStatusFields, string> {
-  return cvars.reduce((acc, el) => ({
-    ...acc,
-    [el.cvarName]: parseCvarValueFromStatus(strToParse, el.cvarName, el.returnType),
-  }), {} as Record<EGetStatusFields, string>);
 }
