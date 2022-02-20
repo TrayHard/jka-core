@@ -1,46 +1,12 @@
-import { EGetStatusFields } from "../constants";
-import { IGetStatusClientUser, parseClientUsersFromStatus } from "../utils/parsers/clientUsersFromStatus.parser";
-import { EGetStatusParseValueType, parseCvarValueFromStatus } from "../utils/parsers/cvarValueFromStatus.parser";
-import { baseRequest } from "./base.request";
-
-export type TGetStatusRawResponse = {
-  cvars: Record<EGetStatusFields, string>,
-  clients: IGetStatusClientUser[],
-}
-
-type TCvarsObject = {
-  cvarName: EGetStatusFields,
-  returnType: EGetStatusParseValueType,
-}
+import { getStatusRawParser, TGetStatusRawResponse } from "../utils/parsers/getStatusRaw.parser";
+import { basicRequest } from "./basic.request";
 
 export async function getStatusRaw(server: string, timeout?: number): Promise<TGetStatusRawResponse> {
-  let response: unknown;
+  let strToParse: string;
   try {
-    response = await baseRequest({ request: 'getstatus', server, timeout })
+    strToParse = await basicRequest({ request: 'getstatus', server, timeout })
+    return getStatusRawParser(strToParse);
   } catch (error) {
-    console.error('GetStatus Request failed:');
-    throw error;
+    throw new Error(`GetStatus Request failed:\n"${(error as Error).message}"`)
   }
-  const strToParse = (response as string).replace(/����statusResponse\n/, '');
-
-  console.log(strToParse);
-
-  const cvars: TCvarsObject[] = Object.values(EGetStatusFields).map((field) => ({
-    cvarName: field as EGetStatusFields,
-    returnType: field === EGetStatusFields.G_GAMETYPE
-      ? EGetStatusParseValueType.GAMETYPE
-      : EGetStatusParseValueType.STRING,
-  }));
-
-  return {
-    cvars: processCvars(strToParse, cvars),
-    clients: parseClientUsersFromStatus(strToParse),
-  };
-}
-
-function processCvars(strToParse: string, cvars: TCvarsObject[]): Record<EGetStatusFields, string> {
-  return cvars.reduce((acc, el) => ({
-    ...acc,
-    [el.cvarName]: parseCvarValueFromStatus(strToParse, el.cvarName, el.returnType),
-  }), {} as Record<EGetStatusFields, string>);
 }
