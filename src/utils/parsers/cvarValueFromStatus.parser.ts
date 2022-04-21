@@ -6,9 +6,9 @@ export enum EGetStatusParseValueType {
   GAMETYPE = 'gametype',
 }
 
-export function parseCvarValueFromStatus(strToParse: string, cvarName: string, type: EGetStatusParseValueType): string | number {
+export function parseCvarValueFromStatus(strToParse: string, cvarName: string, type: EGetStatusParseValueType): string | number | null {
   const match = strToParse.match(new RegExp(`${cvarName}\\\\(.+?)\[\\\\\\n\]`));
-  if (!match) throw new Error(`No "${cvarName}" cvar provided!`)
+  if (!match) return null
   const result = match[1];
   switch (type) {
     case EGetStatusParseValueType.STRING:
