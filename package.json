@@ -1,6 +1,6 @@
 {
   "name": "jka-core",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Library for working with Jedi Academy servers",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
