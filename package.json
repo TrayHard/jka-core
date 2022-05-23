@@ -22,6 +22,9 @@
   },
   "scripts": {
     "dev": "npm install && ts-node-dev --watch --respawn --transpile-only ./src/index.ts",
+    "update:patch": "npm run build && npm version patch && npm publish",
+    "update:minor": "npm run build && npm version minor && npm publish",
+    "update:major": "npm run build && npm version major && npm publish",
     "build": "tsc --project ./"
   },
   "repository": {
