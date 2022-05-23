@@ -8,9 +8,13 @@ npm i jka-core
 ```
 
 ## To do:
-- [ ] `rcon` request
+- [x] `getstatus` raw request
+- [x] `getstatus` typed request
+- [x] `rcon status` request
+- [ ] `rcon` getting cvar values
+- [ ] `rcon` getting clientuser information
 - [ ] `getInfo` request
-- [ ] ... any ideas? Write me in Discord: `Tray#0219`
+- [ ] ... any ideas? Write me in Discord: `Tray#0219` or you can create an issue here
 
 ## Current features
 What you can do right now:
