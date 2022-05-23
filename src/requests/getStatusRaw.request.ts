@@ -7,6 +7,10 @@ export async function getStatusRaw(server: string, timeout?: number): Promise<TG
     strToParse = await basicRequest({ request: 'getstatus', server, timeout })
     return getStatusRawParser(strToParse);
   } catch (error) {
-    throw new Error(`GetStatus Request failed:\n"${(error as Error).message}"`)
+    if (error instanceof Error) {
+      throw new Error(`GetStatus Request failed:\n"${(error as Error).message}"`)
+    } else {
+      throw new Error(`GetStatus Request failed:\n${error}`)
+    }
   }
 }

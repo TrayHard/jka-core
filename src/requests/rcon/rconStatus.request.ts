@@ -15,6 +15,7 @@ export async function rconStatus(server: string, rconpassword: string, timeout?:
     strToParse = await rconBasicRequest({ cmd: 'status', server, rconpassword, timeout })
   } catch (error) {
     console.error('RconStatus Request failed:');
+    console.error(error);
     throw error;
   }
   const serverType = defineTheServerType(strToParse);
