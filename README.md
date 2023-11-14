@@ -14,7 +14,7 @@ npm i jka-core
 - [ ] `rcon` getting cvar values
 - [ ] `rcon` getting clientuser information
 - [ ] `getInfo` request
-- [ ] ... any ideas? Write me in Discord: `Tray#0219` or you can create an issue here
+- [ ] ... any ideas? Write me in Discord: `trayhardplay` or you can create an issue here
 
 ## Current features
 What you can do right now:
