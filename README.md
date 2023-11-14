@@ -19,7 +19,7 @@ npm i jka-core
 ## Current features
 What you can do right now:
 
-1. You can make UDP requests and get the JSON formatted raw response with `getStatusRaw`
+1. You can make UDP requests and get the JSON formatted raw response with `getStatusRaw(server: string, timeout?: number)`
 ```js
 const response = await getStatusRaw('rujka.ru:29070') // or '37.230.210.176:29070'
 
@@ -71,7 +71,7 @@ response = {
   clients: [ { score: '0', ping: '12', name: '[AFK]^2� ^1RU^7JKA^1.Airlines' } ]
 }
 ```
-2. You can use `getStatusSmart` which is same getstatus request but with some post-processing:
+2. You can use `getStatusSmart(server: string, timeout?: number)` which is same getstatus request but with some post-processing:
 
 ```js
 const response = await getStatusSmart('rujka.ru:29070') // or '37.230.210.176:29070'
