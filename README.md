@@ -11,6 +11,7 @@ npm i jka-core
 - [x] `getstatus` raw request
 - [x] `getstatus` typed request
 - [x] `rcon status` request
+- [x] `removeColorCodes` to clean string form `^0-9` color codes
 - [ ] `rcon` getting cvar values
 - [ ] `rcon` getting clientuser information
 - [ ] `getInfo` request
@@ -227,4 +228,9 @@ true // means the value has been successfully set, otherwise it would be false
 
 // gWeaponDisable.get('RANDOM TEXT'):
 null
+```
+5. `removeColorCodes(str: string)` will clean all the `^0-9` color codes from any string
+
+```js
+const userWithoutColorCodes = removeColorCodes('^^^7P^1a^6^7^8d^9a ^0w^2a^2^3^4n'); // returns '^^Pada wan'
 ```
