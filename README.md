@@ -129,7 +129,36 @@ response === {
 }
 ```
 
-3. Class `Bitfield` which allows you to easily work with bitfield values, print them with specified descriptions and change that values as you need:
+3. `rconStatus(server: string, rconpassword: string, timeout?: number)` allows you to get information from your server using rconPassword
+```js
+const response = await rconStatus('rujka.ru:29070', 'dummyRconPassword')
+
+response === {
+  type: 'YBEPROXY',
+  hostname: 'RUJKA|TlsGreen',
+  ip: '37.230.210.176',
+  port: '29071',
+  os: 'Linux',
+  version: '1.0.1.0',
+  protocol: 26,
+  gamename: 'base',
+  map: 'mp/ffa2',
+  gametype: 'DUEL',
+  players: [
+    {
+      id: 0,
+      name: 'padawan',
+      address: '1.1.1.1:29070',
+      isBot: false,
+      ping: 20,
+      score: 0,
+      rate: 25000
+    }  
+  ]
+}
+```
+
+4. Class `Bitfield` which allows you to easily work with bitfield values, print them with specified descriptions and change that values as you need:
 
 ```js
 // Let's define keys for our bitfield
