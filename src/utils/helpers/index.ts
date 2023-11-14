@@ -1,0 +1,1 @@
+export { removeColorCodes } from './removeColorCodes';
