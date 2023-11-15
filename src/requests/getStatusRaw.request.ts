@@ -1,4 +1,4 @@
-import { getStatusRawParser, TGetStatusRawResponse } from "../utils/parsers/getStatusRaw.parser";
+import { getStatusRawParser, TGetStatusRawResponse } from "../utils/parsers/getStatus/getStatusRaw.parser";
 import { basicRequest } from "./basic.request";
 
 export async function getStatusRaw(server: string, timeout?: number): Promise<TGetStatusRawResponse> {

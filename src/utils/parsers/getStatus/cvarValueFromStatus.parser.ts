@@ -1,4 +1,4 @@
-import { gametypeNumToNamesMapper } from "../mappers/gametype.mapper";
+import { gametypeNumToNamesMapper } from "../../mappers/gametype.mapper";
 
 export enum EGetStatusParseValueType {
   STRING = 'string',
