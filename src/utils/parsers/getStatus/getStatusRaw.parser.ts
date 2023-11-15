@@ -1,5 +1,5 @@
-import { EGetStatusFields } from "../..";
-import { parseClientUsersFromStatus, TGetStatusClientUser } from "./clientUsersFromStatus.parser";
+import { EGetStatusFields } from "../../../index";
+import { parseClientUsersFromStatus, TGetStatusClientUser } from "../clientUsers/clientUsersFromStatus.parser";
 import { EGetStatusParseValueType, parseCvarValueFromStatus } from "./cvarValueFromStatus.parser";
 
 export type TGetStatusRawResponse = {

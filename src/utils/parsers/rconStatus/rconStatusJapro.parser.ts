@@ -1,6 +1,6 @@
-import { EGametypes, EServerTypes } from "../..";
-import { gametypeNumToNamesMapper } from "../mappers/gametype.mapper";
-import { clientUsersFromRconStatusJapro, TRconStatusJaproClientUser } from "./clientUsersFromRconStatusJapro.parser";
+import { EGametypes, EServerTypes } from "../../../index";
+import { gametypeNumToNamesMapper } from "../../mappers/gametype.mapper";
+import { clientUsersFromRconStatusJapro, TRconStatusJaproClientUser } from "../clientUsers/clientUsersFromRconStatusJapro.parser";
 
 export type TRconStatusJaproResponse = {
   type: EServerTypes.JAPRO
@@ -9,7 +9,7 @@ export type TRconStatusJaproResponse = {
   port: string,
   os: string,
   version: string,
-  protocol: number,
+  protocol: string,
   gamename: string,
   map: string,
   gametype: EGametypes,
@@ -27,7 +27,7 @@ export function rconStatusJaproParser(strToParse: string): TRconStatusJaproRespo
   let port = '';
   let os = '';
   let version = '';
-  let protocol = 26;
+  let protocol = '';
   let gamename = '';
   let map = '';
   let gametype = EGametypes.DUEL;
@@ -60,7 +60,7 @@ export function rconStatusJaproParser(strToParse: string): TRconStatusJaproRespo
       const match = line.match(/^game\s{4}:\s([0-9\.]+)\s(\d+),\s(\S+)/)
       if (match) {
         version = match[1];
-        protocol = parseInt(match[2]);
+        protocol = match[2];
         gamename = match[3];
       }
 

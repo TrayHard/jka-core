@@ -1,5 +1,5 @@
-import { EServerTypes } from "../..";
-import { clientUsersFromRconStatusBase, TRconStatusBaseClientUser } from "./clientUsersFromRconStatusBase.parser";
+import { EServerTypes } from "../../../index";
+import { clientUsersFromRconStatusBase, TRconStatusBaseClientUser } from "../clientUsers/clientUsersFromRconStatusBase.parser";
 
 export type TRconStatusBaseResponse = {
   type: EServerTypes.BASE

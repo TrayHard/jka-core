@@ -1,6 +1,6 @@
-import { parseBooleanOtherwiseNull, parseFloatOtherwiseNull, parseIntOtherwiseNull } from "..";
-import { Bitfield, EGetStatusFields, FORCEPOWER_DISABLE_VALUES, WEAPON_DISABLE_VALUES } from "../..";
-import { TGetStatusClientUser } from "./clientUsersFromStatus.parser";
+import { parseBooleanOtherwiseNull, parseFloatOtherwiseNull, parseIntOtherwiseNull } from "../../index";
+import { Bitfield, EGetStatusFields, FORCEPOWER_DISABLE_VALUES, WEAPON_DISABLE_VALUES } from "../../../index";
+import { TGetStatusClientUser } from "../clientUsers/clientUsersFromStatus.parser";
 import { getStatusRawParser } from "./getStatusRaw.parser";
 
 type TCvarsSmart = {
