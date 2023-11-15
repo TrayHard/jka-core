@@ -22,7 +22,7 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "npm install && ts-node-dev --watch --respawn --transpile-only ./src/index.ts",
+    "dev": "ts-node-dev --watch --respawn --transpile-only ./src/index.ts",
     "update:patch": "npm run build && npm version patch && npm publish && git push origin --tags",
     "update:minor": "npm run build && npm version minor && npm publish && git push origin --tags",
     "update:major": "npm run build && npm version major && npm publish && git push origin --tags",
