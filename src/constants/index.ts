@@ -11,6 +11,7 @@ export enum EServerTypes {
   JAPRO = 'JAPRO',
   YBEPROXY = 'YBEPROXY',
   BASE = 'BASE',
+  OPENJK = 'OPENJK',
 }
 
 export enum EGetStatusFields {

@@ -1,12 +1,17 @@
 import { EServerTypes } from "../..";
-import { TRconStatusBaseResponse, rconStatusBaseParser } from "../../utils/parsers/rconStatusBase.parser";
-import { TRconStatusJaproResponse, rconStatusJaproParser } from "../../utils/parsers/rconStatusJapro.parser";
-import { TRconStatusYbeproxyResponse, rconStatusYbeproxyParser } from "../../utils/parsers/rconStatusYbeproxy.parser";
+import { TRconStatusBaseResponse, rconStatusBaseParser } from "../../utils/parsers/rconStatus/rconStatusBase.parser";
+import { TRconStatusJaproResponse, rconStatusJaproParser } from "../../utils/parsers/rconStatus/rconStatusJapro.parser";
+import { TRconStatusYbeproxyResponse, rconStatusYbeproxyParser } from "../../utils/parsers/rconStatus/rconStatusYbeproxy.parser";
 import { rconBasicRequest } from "../rconBasic.request";
+import {
+  rconStatusOpenjkParser,
+  TRconStatusOpenjkResponse
+} from "../../utils/parsers/rconStatus/rconStatusOpenjk.parser";
 
 export type TRconStatusResponse =
   TRconStatusBaseResponse |
   TRconStatusYbeproxyResponse |
+  TRconStatusOpenjkResponse |
   TRconStatusJaproResponse
 
 export async function rconStatus(server: string, rconpassword: string, timeout?: number): Promise<TRconStatusResponse> {
@@ -26,6 +31,8 @@ export async function rconStatus(server: string, rconpassword: string, timeout?:
       return rconStatusJaproParser(strToParse);
     case EServerTypes.YBEPROXY:
       return rconStatusYbeproxyParser(strToParse);
+    case EServerTypes.OPENJK:
+      return rconStatusOpenjkParser(strToParse);
     default:
       throw new Error('Unknown server type!')
   }
@@ -39,6 +46,8 @@ function defineTheServerType(strToCheck: string): EServerTypes {
     return EServerTypes.BASE
   } else if (lines.some(line => line.startsWith('uptime'))) {
     return EServerTypes.JAPRO
+  } else if (lines.some(line => line.startsWith('version'))) {
+    return EServerTypes.OPENJK
   } else {
     return EServerTypes.YBEPROXY
   }
