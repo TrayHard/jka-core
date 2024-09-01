@@ -1,4 +1,4 @@
-import { basicRequest } from "./basic.request";
+import { basicRequest } from "../basic.request";
 
 export type TRconBaseRequestParams = {
   server: string,

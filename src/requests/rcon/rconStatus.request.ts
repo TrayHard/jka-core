@@ -2,7 +2,7 @@ import { EServerTypes } from "../..";
 import { TRconStatusBaseResponse, rconStatusBaseParser } from "../../utils/parsers/rconStatus/rconStatusBase.parser";
 import { TRconStatusJaproResponse, rconStatusJaproParser } from "../../utils/parsers/rconStatus/rconStatusJapro.parser";
 import { TRconStatusYbeproxyResponse, rconStatusYbeproxyParser } from "../../utils/parsers/rconStatus/rconStatusYbeproxy.parser";
-import { rconBasicRequest } from "../rconBasic.request";
+import { rconBasicRequest } from "./rconBasic.request";
 import {
   rconStatusOpenjkParser,
   TRconStatusOpenjkResponse
