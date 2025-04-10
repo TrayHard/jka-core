@@ -31,13 +31,20 @@ export const basicRequest = (params: TBaseRequestParams): Promise<string> => {
       socket.on('message', listener);
       setTimeout(() => {
         connection.off('message', listener);
+        socket.close();
         resolve(msg.join(''));
       }, 2000);
+    });
+    socket.on('error', (err) => {
+      console.error('jka-core basic request error: ', err);
+      socket.close();
+      reject('No response!');
     });
     socket.send(packet, 0, packet.length, port, ip);
 
     setTimeout(() => {
       connection.off('message', listener);
+      socket.close();
       reject('No response!')
     }, timeout * 1000);
   })
