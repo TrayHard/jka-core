@@ -23,6 +23,7 @@ export const basicRequest = (params: TBaseRequestParams): Promise<string> => {
   return new Promise<string>((resolve, reject) => {
     const packet = Buffer.from(`\xFF\xFF\xFF\xFF${request}`, 'latin1');
     const socket = createSocket('udp4');
+    let isSocketClosed = false;
     const msg: string[] = [];
     const listener = (response: Buffer) => msg.push(response.toString())
     const connection = socket.once('message', (response) => {
@@ -31,20 +32,23 @@ export const basicRequest = (params: TBaseRequestParams): Promise<string> => {
       socket.on('message', listener);
       setTimeout(() => {
         connection.off('message', listener);
-        socket.close();
+        if (!isSocketClosed) socket.close();
         resolve(msg.join(''));
       }, 2000);
     });
     socket.on('error', (err) => {
       console.error('jka-core basic request error: ', err);
-      socket.close();
+      if (!isSocketClosed) socket.close();
       reject('No response!');
+    });
+    socket.on('close', () => {
+      isSocketClosed = true;
     });
     socket.send(packet, 0, packet.length, port, ip);
 
     setTimeout(() => {
       connection.off('message', listener);
-      socket.close();
+      if (!isSocketClosed) socket.close();
       reject('No response!')
     }, timeout * 1000);
   })
